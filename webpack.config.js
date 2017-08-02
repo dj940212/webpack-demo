@@ -78,7 +78,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit:10000,
-                    name:'../img/[name].[hash:7].[ext]'
+                    name:'img/[name].[hash:7].[ext]'
                 }
             }
 		]
