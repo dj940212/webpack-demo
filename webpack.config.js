@@ -3,6 +3,7 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack")
 var CleanWebpackPlugin = require('clean-webpack-plugin')
+var utils = require('./utils')
 
 module.exports = {
 	entry:{
@@ -14,7 +15,7 @@ module.exports = {
 	output:{
 		path:path.resolve(__dirname,'dist'),
         filename:'js/[name]-[hash].js',
-        publicPath:'/'
+        // publicPath:'./'
 	},
 	module:{
 		loaders:[
@@ -69,7 +70,7 @@ module.exports = {
                 exclude:path.resolve(__dirname,'node_modules'),
                 options: {
                     limit: 10000,
-                    name: 'fonts/[name].[ext]'
+                    name: '/fonts/[name].[ext]'
                 }
             },
             {
@@ -77,7 +78,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit:10000,
-                    name:'img/[name].[hash:7].[ext]'
+                    name:'../img/[name].[hash:7].[ext]'
                 }
             }
 		]
@@ -102,7 +103,7 @@ module.exports = {
 	],
     //方便开发使用，浏览器输入：http://localhost:3000访问
     devServer:{
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: './',
         historyApiFallback: true,
         host:'localhost',
         compress:true,
