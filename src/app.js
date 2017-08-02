@@ -1,4 +1,5 @@
 import './css/index.css'
+import './css/style.less'
 import jQuery from 'jquery'
 import layer from './components/layer/layer.js'
 const App = function(){

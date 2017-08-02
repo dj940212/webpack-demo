@@ -14,6 +14,7 @@ module.exports = {
 	output:{
 		path:path.resolve(__dirname,'dist'),
         filename:'js/[name]-[hash].js',
+        publicPath:'/'
 	},
 	module:{
 		loaders:[
@@ -28,18 +29,36 @@ module.exports = {
              }
            },
            {
-                test:/\.css$/,
-                loader:'style-loader!css-loader',
-                exclude:path.resolve(__dirname,'node_modules')
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use:[
+                        {
+                            loader: 'css-loader',
+                            options:{
+                                minimize: true //css压缩
+                            }
+                        }
+                    ]
+                })
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
+            },
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'less-loader']
+                })
             },
             {
                 test:/\.html$/,
                 loader:'html-loader',
-                exclude:path.resolve(__dirname,'node_modules')
-            },
-            {
-                test:/\.less$/,
-                loader:'style-loader!css-loader!postcss-loader!less-loader',
                 exclude:path.resolve(__dirname,'node_modules')
             }
 		]
@@ -55,10 +74,16 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
            name: 'vendor'
         }),
+        new ExtractTextPlugin({
+            //生成css文件名
+            filename: 'css/[name].css',
+            disable: false,
+            allChunks: true
+        })
 	],
     //方便开发使用，浏览器输入：http://localhost:3000访问
     devServer:{
-        contentBase:'./dist',
+        contentBase:'./',
         host:'localhost',
         compress:true,
         port:3000,
