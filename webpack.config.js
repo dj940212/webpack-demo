@@ -14,7 +14,7 @@ module.exports = {
     },
 	output:{
 		path:path.resolve(__dirname,'dist'),
-        filename:'js/[name]-[hash].js',
+        filename:'js/[name]-bundle.js',
         // publicPath:'./'
 	},
 	module:{
@@ -96,7 +96,7 @@ module.exports = {
         }),
         new ExtractTextPlugin({
             //生成css文件名
-            filename: 'css/[name].css',
+            filename: 'css/[name]-bundle.css',
             disable: false,
             allChunks: true
         })
