@@ -7,7 +7,7 @@ var CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
 	entry:{
         main: './src/app.js',
-        server: 'webpack-dev-server/client?http://localhost:3000/',
+        server: 'webpack-dev-server/client?http://localhost:3000/',//浏览器实时刷新配置
         vendor: [
             'jquery'
         ]
