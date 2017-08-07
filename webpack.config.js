@@ -3,11 +3,11 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack")
 var CleanWebpackPlugin = require('clean-webpack-plugin')
-var utils = require('./utils')
 
 module.exports = {
 	entry:{
         main: './src/app.js',
+        server: 'webpack-dev-server/client?http://localhost:3000/',
         vendor: [
             'jquery'
         ]
@@ -106,10 +106,8 @@ module.exports = {
         contentBase: './',
         historyApiFallback: true,
         host:'localhost',
-        compress:true,
+        // compress:true,
         port:3000,
-        inline:true,
-        hot:true
     }
 	
 }
